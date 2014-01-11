@@ -9,7 +9,7 @@ module Unfug
     def available_plugins
       self.plugins.map do |pluginname|
         begin
-          Object.get_const pluginname
+          Object.get_const "Unfug::Plugins::#{pluginname}" #Echo turns into EchoPlugin
         rescue NameError
           nil
         end

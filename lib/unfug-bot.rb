@@ -3,6 +3,10 @@ require "yaml"
 require "http"
 require "daemons"
 
+require "./unfug-bot/bot"
+require "./unfug-bot/config"
+require "./unfug-bot/plugin"
+
 module Unfug
 
   class BotRunner

@@ -1,16 +1,15 @@
 module Unfug
 
-  class Plugin
-    include Cinch::Plugin
+  module Plugins
 
-    attr_reader :config
+    class Echo
+      include Cinch::Plugin
 
-    def initialize(config)
-      @config = config
-    end
+      match "echo"
 
-    def match(pattern, options = {})
-      super(@config.tigger_character + pattern, options)
+      def execute m
+        m.reply m.message
+      end
     end
 
   end
