@@ -4,11 +4,11 @@ require "http"
 require "daemons"
 
 class Config < YAML
-  
+
   [ :botnick , :channels, :trigger_character, :plugins, :server ].each do |sym|
     self.define_method(sym, lambda { self[sym.to_s] } )
   end
-  
+
 end
 
 class BotRunner
@@ -17,21 +17,21 @@ class BotRunner
 
   def initialize(configs)
     @configs = configs
-    @configs.each do |c| 
+    @configs.each do |c|
       (@bots ||= []) << gen_bot_for_config c # ;-) :P
     end
   end
-  
+
   def strs_to_consts(strs)
     strs.map do |s|
-      begin 
+      begin
         Object.const_get s
       rescue NameError
         nil
       end
     end.compact
   end
-  
+
   def gen_bot_for_config c
     Cinch::Bot.new do
       configure do |conf|
@@ -43,11 +43,11 @@ class BotRunner
       end
     end
   end
-  
+
   def run
     @bots.map(&:start)
   end
-  
+
   def stop
     @bots.map(&:quit)
   end
