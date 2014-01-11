@@ -18,7 +18,7 @@ class BotRunner
   def initialize(configs)
     @configs = configs
     @configs.each do |c|
-      (@bots ||= []) << gen_bot_for_config c # ;-) :P
+      (@bots ||= []) << gen_bot_for_config(c)
     end
   end
 
