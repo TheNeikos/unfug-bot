@@ -19,6 +19,23 @@ class Config < YAML
     end.compact
   end
 
+  def validate
+    validate_botnick and validate_trigger_character
+  end
+
+  private
+
+  #
+  # Our channels only allow nick name length to be 8 characters max
+  #
+  def validate_botnick
+    self.botnick.is_a? String and self.botnick.length <= 8
+  end
+
+  def validate_trigger_character
+    self.tigger_character.is_a? String and self.trigger_character.length == 1
+  end
+
 end
 
 class BotRunner
